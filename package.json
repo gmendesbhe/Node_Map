@@ -1,0 +1,17 @@
+{
+  "name": "node_map",
+  "version": "1.0.0",
+  "description": "Mapeamento FluentNHibernate por meio do nodejs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "FluentNHibernate"
+  ],
+  "author": "Guilherme Mendes",
+  "license": "MIT",
+  "dependencies": {
+    "mssql": "^4.1.0"
+  }
+}
