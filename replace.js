@@ -1,7 +1,7 @@
 function getProperty(columnMetadata) {
-    let string = 'public virtual';
+    let property = 'public virtual';
     ////////////////
-    return string.concat(string, '{ get; set; }');
+    return property.concat('{ get; set; }');
 }
 
 module.exports = {
@@ -16,9 +16,15 @@ module.exports = {
      */
     replaceProperties: (template, columnsMetadata) => {
         let tempProperties = template;
-        for (const column of columnsMetadata) {
-            tempProperties = tempProperties.replace('(props)', `${getProperty(column)}\n(props)`);
+        for (const key in columnsMetadata) {
+            if (columnsMetadata.hasOwnProperty(key)) {
+                const column = columnsMetadata[key];
+                tempProperties = tempProperties.replace(/(^(?: +|\t+)*)(\(props\))/m, `$1${getProperty(column)}\r\n$1$2`);
+            }
         }
+        // for (const column of columnsMetadata) {
+        //     tempProperties = tempProperties.replace('(props)', `${getProperty(column)}\n(props)`);
+        // }
         return tempProperties.replace('(props)', '');
     }
 }
