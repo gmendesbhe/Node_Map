@@ -2,7 +2,7 @@ const sql = require('mssql');
 
 const config = require('./conf').sqlConnection;
 
-const template = require('./readTemplate');
+const template = require('../FileSystem/readTemplate');
 
 
 module.exports = {

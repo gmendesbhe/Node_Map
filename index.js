@@ -1,8 +1,7 @@
-const config = require('./conf');
-const reading = require('./readTemplate');
-const writing = require('./writeTemplate');
-const meta = require('./meta');
-// console.log(config);
+const config = require('./DatabaseAccess/conf');
+const reading = require('./FileSystem/readTemplate');
+const writing = require('./FileSystem/writeTemplate');
+const meta = require('./DatabaseAccess/meta');
 
 function a()  {
     let template = {};
@@ -11,4 +10,3 @@ function a()  {
 }
 
 a();
-// console.log(template.readTemplateSync(config.CaminhoTemplateEntidade));

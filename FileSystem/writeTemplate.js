@@ -1,11 +1,11 @@
 const fs = require('fs');
-const config = require('./conf');
+const config = require('../DatabaseAccess/conf');
 // let Template = '';
 let written = false;
 
 function test(metadata, tableName) {
     let interval = setInterval(() => {
-        let csClass = require('./replace').replaceNamespace(Template);
+        let csClass = require('../Replacer/replace').replaceNamespace(Template);
         csClass
     },
         5000);
@@ -49,7 +49,7 @@ module.exports = {
             let interval = setInterval(() => {
                 if (templateRef.template) {
                     templateRef.final = templateRef.template.replace('(namespace)', config.Namespace);
-                    templateRef.final = require('./replace').replaceProperties(templateRef.final, result);
+                    templateRef.final = require('../Replacer/replace').replaceProperties(templateRef.final, result);
                     fs.writeFile('./saida.cs', templateRef.final, (err) => { console.error(err); })
                     written = true;
                 }

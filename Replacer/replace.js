@@ -9,7 +9,7 @@ module.exports = {
      * @param {string} template
      */
     replaceNamespace: (template) => {
-        return template.replace('(namespace)', require('./conf').Namespace);
+        return template.replace('(namespace)', require('../DatabaseAccess/conf').Namespace);
     },
     /**
      * @param {string} template
@@ -26,5 +26,16 @@ module.exports = {
         //     tempProperties = tempProperties.replace('(props)', `${getProperty(column)}\n(props)`);
         // }
         return tempProperties.replace('(props)', '');
+    },
+    replacePatterns: (template) => {
+        const patDic = require('./replacingDictionary').Dictionary;
+        let temporaryTemplate = template;
+        for (const pattern in patDic) {
+            let regex = RegExp(eval(`/(^.*?)${pattern}(.*$)/`));
+            if (patDic.hasOwnProperty(pattern)) {
+                const element = patDic[pattern];
+                temporaryTemplate = temporaryTemplate.replace(regex, `$1${element}$2`);
+            }
+        }
     }
 }
