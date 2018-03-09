@@ -10,7 +10,7 @@
     "FluentNHibernate"
   ],
   "author": "Guilherme Mendes",
-  "license": "MIT",
+  "license": "",
   "dependencies": {
     "mssql": "^4.1.0"
   }
