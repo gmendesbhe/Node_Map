@@ -1,9 +1,9 @@
 const sql = require('mssql');
 
-const config = require('./conf').sqlConnection;
+const config = require('../Configuration/conf').sqlConnection;
 
 const template = require('../FileSystem/readTemplate');
-
+sql.TYPES
 
 module.exports = {
     readMetadata: (callback) => {

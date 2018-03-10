@@ -1,24 +1,24 @@
 const fs = require('fs');
-const config = require('../DatabaseAccess/conf');
+// const config = require('../DatabaseAccess/conf');
 // let Template = '';
 let written = false;
 
-function test(metadata, tableName) {
-    let interval = setInterval(() => {
-        let csClass = require('../Replacer/replace').replaceNamespace(Template);
-        csClass
-    },
-        5000);
-    if (written) {
-        clearInterval(interval);
-        written = false;
-    };
-}
+// function test(metadata, tableName) {
+//     let interval = setInterval(() => {
+//         let csClass = require('../Replacer/replace').replaceNamespace(Template);
+//         csClass
+//     },
+//         5000);
+//     if (written) {
+//         clearInterval(interval);
+//         written = false;
+//     };
+// }
 
 module.exports = {
     /**
      * Saves the template for later use
-     * @param {object} templateRef reference for where to store the template
+     * @param {Object} templateRef reference for where to store the template
      * @returns Function(err,data):void
      */
     loadTemplate: (templateRef) => {
@@ -48,8 +48,9 @@ module.exports = {
             }
             let interval = setInterval(() => {
                 if (templateRef.template) {
-                    templateRef.final = templateRef.template.replace('(namespace)', config.Namespace);
-                    templateRef.final = require('../Replacer/replace').replaceProperties(templateRef.final, result);
+                    const replacer = require('../Replacer/replace');
+                    templateRef.final = replacer.replacePatterns(templateRef.template);// templateRef.template.replace('(namespace)', config.Namespace);
+                    templateRef.final = replacer.replaceProperties(templateRef.final, result);
                     fs.writeFile('./saida.cs', templateRef.final, (err) => { console.error(err); })
                     written = true;
                 }

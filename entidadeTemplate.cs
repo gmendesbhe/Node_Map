@@ -1,9 +1,9 @@
 ﻿using System;
 
-namespace (namespace)
+namespace _namespace_
 {
-	public class (NomeEntidade)
+	public class __className__
 	{
-		(props)
+		public (props) {get; set;}
 	}
 }
