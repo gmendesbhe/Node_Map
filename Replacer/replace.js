@@ -1,9 +1,17 @@
+const dic = require('../Configuration/replacingDictionary');
+
 function getProperty(aColumnInfo) {
-    return `${aColumnInfo.type[0].name} ${aColumnInfo.name}` ;
+    let columnType = aColumnInfo.type[0].name;
+    let type = dic.TypesDictionary[columnType] || columnType.toString();
+    if (aColumnInfo.nullable && type.endsWith('?') && dic.NullablePattern) {
+        type = dic.NullablePattern.replace('__type__', type);
+    }
+    return `${type} ${aColumnInfo.name}`;
 }
 
+
 module.exports = {
-    
+
     /** Writes the properties on the template
      * @param {string} aTemplate template where to replace stuff
      * @param {JSON} aColumnsInfo column information in json format
@@ -26,7 +34,7 @@ module.exports = {
      */
     replacePatterns: (aTemplate) => {
         let temporaryTemplate = aTemplate;
-        const patDic = require('../Configuration/replacingDictionary').PatternDictionary;
+        const patDic = dic.PatternDictionary;
         for (const pattern in patDic) {
             let regex = eval(`/${pattern}/g`);
             if (patDic.hasOwnProperty(pattern)) {

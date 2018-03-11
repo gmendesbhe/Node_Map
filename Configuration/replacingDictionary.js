@@ -7,8 +7,15 @@ const patternDic = {
     __className__: 'testClass'
 }
 
+/** Pattern to how to represent nullable values"
+ * @type {string}
+ */
+const nullablePattern = '__type__?';
+
+
 /** Patterns you want to replace on the template,
- * being "sql type" : "language type"
+ * being "sql type" : "language type"; If "language type" can be null
+ * write "?" (question mark) at the end of it
  * @type {Object.<string,string>}
  */
 const typesDic = {
@@ -53,6 +60,5 @@ const typesDic = {
 
 
 module.exports.PatternDictionary = patternDic;
-
-
 module.exports.TypesDictionary = typesDic;
+module.exports.NullablePattern = nullablePattern;
