@@ -2,7 +2,7 @@
 
 namespace _namespace_
 {
-	public class __className__
+	public class __classname__
 	{
 		public __props__ {get; set;}
 	}

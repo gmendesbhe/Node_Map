@@ -3,8 +3,7 @@
  * @type {Object.<string,string|function>}
  */
 const patternDic = {
-    _namespace_: 'testNamespace',
-    __className__: 'testClass'
+    _namespace_: 'testNamespace'
 }
 
 /** Pattern to how to represent nullable values"

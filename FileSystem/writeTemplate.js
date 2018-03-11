@@ -23,16 +23,19 @@ module.exports = {
      * @returns {function(string,string):void} Function(err,data):void
      */
     writeTemplate: (aTemplateRef) => {
-        function write(err, result) {
-            if (err) {
-                throw err;
+        function write(aErr, aResult) {
+            if (aErr) {
+                throw aErr;
             }
             let interval = setInterval(() => {
                 if (aTemplateRef.template) {
+                    const paths = require('../Configuration/paths');
+                    const extension = paths.TemplatePath.substr(paths.TemplatePath.lastIndexOf('.'));
                     const replacer = require('../Replacer/replace');
                     aTemplateRef.final = replacer.replacePatterns(aTemplateRef.template);
-                    aTemplateRef.final = replacer.replaceProperties(aTemplateRef.final, result);
-                    fs.writeFile('./saida.cs', aTemplateRef.final, (err) => { console.error(err); })
+                    aTemplateRef.final = replacer.replaceClassName(aTemplateRef.template, aResult);
+                    aTemplateRef.final = replacer.replaceProperties(aTemplateRef.final, aResult);
+                    fs.writeFile(`${paths.ExitPath}/saida${extension}`, aTemplateRef.final, (err) => { console.error(err); })
                     written = true;
                 }
                 if (written) {

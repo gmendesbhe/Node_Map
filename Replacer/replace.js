@@ -12,7 +12,7 @@ function getProperty(aColumnInfo) {
 
 module.exports = {
 
-    /** Writes the properties on the template
+    /** Writes the properties on the template, replacing __props__
      * @param {string} aTemplate template where to replace stuff
      * @param {JSON} aColumnsInfo column information in json format
      * @returns {string}
@@ -42,6 +42,17 @@ module.exports = {
                 temporaryTemplate = temporaryTemplate.replace(regex, `${element}`);
             }
         }
+        return temporaryTemplate;
+    },
+    /** Writes the class name on the template, replacing __classname__
+     * @param {string} aTemplate template where to replace stuff
+     * @param {string} aClassName name of the class
+     * @returns {string}
+     */
+    replaceClassName: (aTemplate, aClassName) => {
+        let temporaryTemplate = aTemplate;
+        let regex = /(^(?: +|\t+)*.*?)(__classname__)(.*)/m;
+        temporaryTemplate = temporaryTemplate.replace(regex, `$1${aClassName}$3`);
         return temporaryTemplate;
     }
 }
