@@ -1,15 +1,9 @@
 function getProperty(columnMetadata) {
-    ////////////////
     return `${columnMetadata.type[0].name} ${columnMetadata.name}` ;
 }
 
 module.exports = {
-    // /**
-    //  * @param {string} template
-    //  */
-    // replaceNamespace: (template) => {
-    //     return template.replace('(namespace)', require('../DatabaseAccess/conf').Namespace);
-    // },
+    
     /**
      * @param {string} template
      */
