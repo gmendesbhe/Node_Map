@@ -1,11 +1,12 @@
 /** Patterns you want to replace on the template,
  * being "pattern" : "replace with"
- * @type {Object.<string,string>}
+ * @type {Object.<string,string|function>}
  */
 const patternDic = {
     _namespace_: 'testNamespace',
     __className__: 'testClass'
 }
+
 /** Patterns you want to replace on the template,
  * being "sql type" : "language type"
  * @type {Object.<string,string>}
@@ -45,6 +46,11 @@ const typesDic = {
     Geometry: '',
     Variant: ''
 }
+
+
+
+
+
 
 module.exports.PatternDictionary = patternDic;
 

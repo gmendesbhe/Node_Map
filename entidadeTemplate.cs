@@ -4,6 +4,6 @@ namespace _namespace_
 {
 	public class __className__
 	{
-		public (props) {get; set;}
+		public __props__ {get; set;}
 	}
 }

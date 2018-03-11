@@ -1,29 +1,32 @@
-function getProperty(columnMetadata) {
-    return `${columnMetadata.type[0].name} ${columnMetadata.name}` ;
+function getProperty(aColumnInfo) {
+    return `${aColumnInfo.type[0].name} ${aColumnInfo.name}` ;
 }
 
 module.exports = {
     
-    /**
-     * @param {string} template
+    /** Writes the properties on the template
+     * @param {string} aTemplate template where to replace stuff
+     * @param {JSON} aColumnsInfo column information in json format
+     * @returns {string}
      */
-    replaceProperties: (template, columnsMetadata) => {
-        let tempProperties = template;
-        let regex = /(^(?: +|\t+)*.*?)(\(props\))(.*)/m;
-        for (const key in columnsMetadata) {
-            if (columnsMetadata.hasOwnProperty(key)) {
-                const column = columnsMetadata[key];
+    replaceProperties: (aTemplate, aColumnsInfo) => {
+        let tempProperties = aTemplate;
+        let regex = /(^(?: +|\t+)*.*?)(__props__)(.*)/m;
+        for (const key in aColumnsInfo) {
+            if (aColumnsInfo.hasOwnProperty(key)) {
+                const column = aColumnsInfo[key];
                 tempProperties = tempProperties.replace(regex, `$1${getProperty(column)}$3\r\n$1$2$3`);
             }
         }
         return tempProperties.replace(regex, '');
     },
-    /**
-     * @param {string} template
+    /** Replaces any patterns written on patternDic with it's value
+     * @param {string} aTemplate template where to replace stuff
+     * @returns {string}
      */
-    replacePatterns: (template) => {
+    replacePatterns: (aTemplate) => {
+        let temporaryTemplate = aTemplate;
         const patDic = require('../Configuration/replacingDictionary').PatternDictionary;
-        let temporaryTemplate = template;
         for (const pattern in patDic) {
             let regex = eval(`/${pattern}/g`);
             if (patDic.hasOwnProperty(pattern)) {
