@@ -4,14 +4,23 @@
   "description": "Mapeamento FluentNHibernate por meio do nodejs",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
     "FluentNHibernate"
   ],
   "author": "Guilherme Mendes",
-  "license": "",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/gmendesbhe/Node_Map.git"
+  },
+  "license": "UNLICENSED",
+  "private": true,
   "dependencies": {
     "mssql": "^4.1.0"
+  },
+  "devDependencies": {
+    "jasmine": "^3.1.0"
   }
 }
