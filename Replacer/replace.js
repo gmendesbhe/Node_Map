@@ -1,12 +1,17 @@
 const dic = require('../Configuration/replacingDictionary');
 
-function getProperty(aColumnInfo) {
-    let columnType = aColumnInfo.type[0].name;
-    let type = dic.TypesDictionary[columnType] || columnType.toString();
-    if (aColumnInfo.nullable && type.endsWith('?') && dic.NullablePattern) {
-        type = dic.NullablePattern.replace('__type__', type.substring(0,type.indexOf('?')-1));
+function getClassProperty(aColumnInfo) {
+    if (aColumnInfo.Column_name.match(dic.ExcludeFromClass)) {
+        return null;
     }
-    return `${type} ${aColumnInfo.name}`;
+    let columnType = aColumnInfo.Type;
+    let type = dic.TypesDictionary[columnType] || columnType.toString();
+    if (aColumnInfo.Nullable == 'yes'
+        && type.endsWith('?')
+        && dic.NullablePattern) {
+        type = dic.NullablePattern.replace('__type__', type.substring(0, type.indexOf('?') - 1));
+    }
+    return `${type} ${aColumnInfo.Column_name}`;
 }
 
 
@@ -23,7 +28,10 @@ module.exports = {
         for (const key in aColumnsInfo) {
             if (aColumnsInfo.hasOwnProperty(key)) {
                 const column = aColumnsInfo[key];
-                tempProperties = tempProperties.replace(regex, `$1${getProperty(column)}$3\r\n$1$2$3`);
+                let property = getClassProperty(column);
+                if(property){
+                    tempProperties = tempProperties.replace(regex, `$1${property}$3\r\n$1$2$3`);
+                }
             }
         }
         return tempProperties.replace(regex, '');

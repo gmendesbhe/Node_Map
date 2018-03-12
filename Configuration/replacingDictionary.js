@@ -54,3 +54,4 @@ const typesDic = {
 module.exports.PatternDictionary = patternDic;
 module.exports.TypesDictionary = typesDic;
 module.exports.NullablePattern = nullablePattern;
+module.exports.ExcludeFromClass = /\w+_THREE/;

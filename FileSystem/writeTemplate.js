@@ -33,8 +33,8 @@ module.exports = {
                     const extension = paths.TemplatePath.substr(paths.TemplatePath.lastIndexOf('.'));
                     const replacer = require('../Replacer/replace');
                     aTemplateRef.final = replacer.replacePatterns(aTemplateRef.template);
-                    aTemplateRef.final = replacer.replaceClassName(aTemplateRef.template, aResult);
-                    aTemplateRef.final = replacer.replaceProperties(aTemplateRef.final, aResult);
+                    aTemplateRef.final = replacer.replaceClassName(aTemplateRef.template, aResult.recordsets[0][0].Name);
+                    aTemplateRef.final = replacer.replaceProperties(aTemplateRef.final, aResult.recordsets[1]);
                     fs.writeFile(`${paths.ExitPath}/saida${extension}`, aTemplateRef.final, (err) => { console.error(err); })
                     written = true;
                 }
