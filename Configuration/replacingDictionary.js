@@ -28,7 +28,7 @@ const typesDic = {
     Bit: '',
     Float: 'float',
     Numeric: '',
-    Decimal: 'decimal',
+    Decimal: 'decimal?',
     Real: '',
     Date: 'DateTime',
     DateTime: 'DateTime',

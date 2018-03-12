@@ -4,7 +4,7 @@ function getProperty(aColumnInfo) {
     let columnType = aColumnInfo.type[0].name;
     let type = dic.TypesDictionary[columnType] || columnType.toString();
     if (aColumnInfo.nullable && type.endsWith('?') && dic.NullablePattern) {
-        type = dic.NullablePattern.replace('__type__', type);
+        type = dic.NullablePattern.replace('__type__', type.substring(0,type.indexOf('?')-1));
     }
     return `${type} ${aColumnInfo.name}`;
 }
