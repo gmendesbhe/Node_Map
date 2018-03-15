@@ -36,7 +36,13 @@ module.exports = {
                     aTemplateRef.final = replacer.replacePatterns(aTemplateRef.template);
                     aTemplateRef.final = replacer.replaceClassName(aTemplateRef.template, aResult.recordsets[0][0].Name);
                     aTemplateRef.final = replacer.replaceProperties(aTemplateRef.final, aResult.recordsets[1]);
-                    fs.writeFile(`${paths.ExitPath}/saida${extension}`, aTemplateRef.final, (err) => { console.error(err); })
+                    fs.writeFile(`${paths.ExitPath}/${aTemplateRef.template, aResult.recordsets[0][0].Name}${extension}`,
+                        aTemplateRef.final,
+                        (err) => {
+                            if (err) {
+                                console.error(err);
+                            }
+                        });
                     written = true;
                 }
                 if (written) {
@@ -48,5 +54,5 @@ module.exports = {
         }
         return write;
     }
-    
+
 }
