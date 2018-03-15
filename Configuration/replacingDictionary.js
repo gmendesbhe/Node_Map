@@ -1,4 +1,5 @@
-/** Patterns you want to replace on the template,
+/**
+ * Patterns you want to replace on the template,
  * being "pattern" : "replace with"
  * @type {Object.<string,string|function>}
  */
@@ -6,13 +7,15 @@ const patternDic = {
     _namespace_: 'testNamespace'
 }
 
-/** Pattern to how to represent nullable values"
+/**
+ * Pattern to how to represent nullable values"
  * @type {string}
  */
 const nullablePattern = '__type__?';
 
 
-/** Patterns you want to replace on the template,
+/**
+ * Patterns you want to replace on the template,
  * being "sql type" : "language type"; If "language type" can be null
  * write "?" (question mark) at the end of it
  * @type {Object.<string,string>}

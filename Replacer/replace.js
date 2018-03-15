@@ -17,7 +17,8 @@ function getClassProperty(aColumnInfo) {
 
 module.exports = {
 
-    /** Writes the properties on the template, replacing __props__
+    /**
+     * Writes the properties on the template, replacing __props__
      * @param {string} aTemplate template where to replace stuff
      * @param {JSON} aColumnsInfo column information in json format
      * @returns {string}
@@ -29,14 +30,15 @@ module.exports = {
             if (aColumnsInfo.hasOwnProperty(key)) {
                 const column = aColumnsInfo[key];
                 let property = getClassProperty(column);
-                if(property){
+                if (property) {
                     tempProperties = tempProperties.replace(regex, `$1${property}$3\r\n$1$2$3`);
                 }
             }
         }
         return tempProperties.replace(regex, '');
     },
-    /** Replaces any patterns written on patternDic with it's value
+    /**
+     * Replaces any patterns written on patternDic with it's value
      * @param {string} aTemplate template where to replace stuff
      * @returns {string}
      */
@@ -52,7 +54,8 @@ module.exports = {
         }
         return temporaryTemplate;
     },
-    /** Writes the class name on the template, replacing __classname__
+    /**
+     * Writes the class name on the template, replacing __classname__
      * @param {string} aTemplate template where to replace stuff
      * @param {string} aClassName name of the class
      * @returns {string}

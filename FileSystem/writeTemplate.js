@@ -18,7 +18,8 @@ module.exports = {
         return load;
     },
 
-    /** writes the template to an exit file
+    /**
+     * writes the template to an exit file
      * @param {Object} aTemplateRef reference for where to store the template
      * @returns {function(string,string):void} Function(err,data):void
      */
