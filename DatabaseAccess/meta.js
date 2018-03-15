@@ -10,14 +10,20 @@ const config = require('../Configuration/databaseConfig');
  * @returns {string} complete query
  */
 function getWhereClause(aQuery, aTables) {
-    let q = aQuery.concat(' WHERE TABLE_NAME ');
-    if (Array.isArray(aTables)) {
-        return q.concat(`IN ('${aTables.join('\',\'')}')`);
+    if (aTables) {
+        if (typeof aTables !== 'string' && !Array.isArray(aTables)) {
+            throw Error('Table name informed is not strings');
+        }
+        let q = aQuery.concat(' WHERE TABLE_NAME ');
+        if (Array.isArray(aTables)) {
+            return q.concat(`IN ('${aTables.join('\',\'')}')`);
+        }
+        if (aTables.includes('%')) {
+            return q.concat(`LIKE '${aTables}'`)
+        }
+        return q.concat(`= '${aTables}'`)
     }
-    if (aTables.includes('%')) {
-        return q.concat(`LIKE '${aTables}'`)
-    }
-    return q.concat(`= '${aTables}'`)
+    return aQuery;
 }
 
 
@@ -35,9 +41,7 @@ module.exports = {
             }
             const requestTables = new sql.Request(pool);
             let query = 'SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES';
-            if (config.tables) {
-                query = getWhereClause(query, config.tables);
-            }
+            query = getWhereClause(query, config.tables);
             requestTables.query(query, (err, result) => {
                 if (err) {
                     console.error(err);
