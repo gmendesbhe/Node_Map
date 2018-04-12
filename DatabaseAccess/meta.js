@@ -49,7 +49,7 @@ module.exports = {
                 }
                 for (const table of result.recordsets) {
                     const requestInfo = new sql.Request(pool);
-                    requestInfo.query(`sp_help ${table.TABLE_NAME}`, aCallback);
+                    requestInfo.query(`sp_help ${table[0].TABLE_NAME}`, aCallback);
                 }
             });
         });
